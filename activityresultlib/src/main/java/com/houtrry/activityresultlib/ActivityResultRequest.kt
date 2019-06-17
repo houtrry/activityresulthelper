@@ -8,11 +8,12 @@ import android.os.Parcelable
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import java.io.Serializable
-import java.util.*
 
 class ActivityResultRequest {
 
-    private val FRAGMENT_TAG = "on_activity_result_dispatcher_fragment"
+    companion object {
+        const val FRAGMENT_TAG = "on_activity_result_dispatcher_fragment"
+    }
 
     private lateinit var mBuilder: Builder
 
@@ -70,9 +71,37 @@ class ActivityResultRequest {
             return this
         }
 
+        fun withIntArray(key: String, value: IntArray, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putIntArray(key, value)
+            }
+            return this
+        }
+
+        fun withIntArrayList(key: String, value: ArrayList<Int>?, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putIntegerArrayList(key, value)
+            }
+            return this
+        }
+
         fun withString(key: String, value: String?, needAdd: Boolean = true): Builder {
             if (needAdd) {
                 bundle.putString(key, value)
+            }
+            return this
+        }
+
+        fun withStringArray(key: String, value: Array<String>?, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putStringArray(key, value)
+            }
+            return this
+        }
+
+        fun withStringArrayList(key: String, value: ArrayList<String>?, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putStringArrayList(key, value)
             }
             return this
         }
@@ -84,9 +113,23 @@ class ActivityResultRequest {
             return this
         }
 
+        fun withBooleanArray(key: String, value: BooleanArray, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putBooleanArray(key, value)
+            }
+            return this
+        }
+
         fun withLong(key: String, value: Long, needAdd: Boolean = true): Builder {
             if (needAdd) {
                 bundle.putLong(key, value)
+            }
+            return this
+        }
+
+        fun withLongArray(key: String, value: LongArray, needAdd: Boolean = true): Builder {
+            if (needAdd) {
+                bundle.putLongArray(key, value)
             }
             return this
         }
