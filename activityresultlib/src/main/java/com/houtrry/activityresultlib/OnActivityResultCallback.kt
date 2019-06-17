@@ -16,5 +16,5 @@ interface OnActivityResultCallback {
      * @param resultIntent
      * @param isOk code is REQUEST_OK
      */
-    fun onActivityResult(resultCode: Int, resultIntent: Intent, isOk: Boolean)
+    fun onActivityResult(resultCode: Int, resultIntent: Intent?, isOk: Boolean)
 }

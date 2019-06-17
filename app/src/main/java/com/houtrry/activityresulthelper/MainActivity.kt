@@ -8,7 +8,7 @@ import com.houtrry.activityresultlib.ActivityResultRequest
 import com.houtrry.activityresultlib.OnActivityResultCallback
 
 class MainActivity : AppCompatActivity(), OnActivityResultCallback {
-    override fun onActivityResult(resultCode: Int, resultIntent: Intent, isOk: Boolean) {
+    override fun onActivityResult(resultCode: Int, resultIntent: Intent?, isOk: Boolean) {
         Log.d("", "resultCode: $resultCode, isOk: $isOk, resultIntent: $resultIntent")
     }
 
@@ -26,7 +26,11 @@ class MainActivity : AppCompatActivity(), OnActivityResultCallback {
                 context = this@MainActivity
                 targetActivityCls = Main2Activity::class.java
                 fragmentManager = this@MainActivity.supportFragmentManager
-                onResultCallback = this@MainActivity
+                onResultCallback = object :OnActivityResultCallback{
+                    override fun onActivityResult(resultCode: Int, resultIntent: Intent?, isOk: Boolean) {
+                        Log.d("", "resultCode: $resultCode, isOk: $isOk, resultIntent: $resultIntent")
+                    }
+                }
             }
             .withBoolean(KEY_NAME, true, false)
             .withInt("abc", 12)
@@ -39,7 +43,11 @@ class MainActivity : AppCompatActivity(), OnActivityResultCallback {
         val builder = ActivityResultRequest.Builder()
         builder.fromActivity(this)
             .toActivity(Main2Activity::class.java)
-            .onActivityResultCallback(this)
+            .onActivityResultCallback(object :OnActivityResultCallback{
+                override fun onActivityResult(resultCode: Int, resultIntent: Intent?, isOk: Boolean) {
+                    Log.d("", "resultCode: $resultCode, isOk: $isOk, resultIntent: $resultIntent")
+                }
+            })
             .withString("abc", "efg")
             .build()
             .start()
