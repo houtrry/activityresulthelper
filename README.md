@@ -38,3 +38,7 @@ val builder = ActivityResultRequest.Builder()
 
 ## 原理
 实际上也是通过Activity#startActivityForResult实现的页面跳转, 只不过在跳转页面前, 在当前页面添加一个没有布局的Fragment, 重写Fragment#onActivityResult, 在Fragment#onActivityResult里处理下个页面的返回值.具体逻辑可以参考代码.
+
+## 思考
+系统为什么不把onActivityResult设计成回调? 使用回调的话, 会有什么问题?
+    提示:AActivity->BActivity后, 如果AActivity因为系统内存不足被系统回收后, BActivity中调用setResult方法会发生什么? 系统会重建AActivity, 但是这个重建的AActivity与回调这个匿名内部类所持有的AActivity是同一个吗? 如果不是同一个, 会有什么问题? 如何解决这个问题?
